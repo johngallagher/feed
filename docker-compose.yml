@@ -3,10 +3,10 @@ services:
   feed_writer:
     environment:
       - PORT
-    build: ../feed_writer
+    image: gcr.io/${PROJECT_ID}/feed-writer:v1
     ports:
       - "${PORT}:${PORT}"
     depends_on:
       - feed_reader
   feed_reader:
-    build: ../feed_reader
+    image: gcr.io/${PROJECT_ID}/feed-reader:v2
