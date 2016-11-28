@@ -3,10 +3,10 @@ services:
   feed_writer:
     environment:
       - PORT
-    build: feed_writer
+    build: ../feed_writer
     ports:
       - "${PORT}:${PORT}"
     depends_on:
       - feed_reader
   feed_reader:
-    build: feed_reader
+    build: ../feed_reader
