@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+git clone git@github.com:johngallagher/feed.git feed
+git clone git@github.com:johngallagher/feed_reader.git feed_reader
+git clone git@github.com:johngallagher/feed_writer.git feed_writer
+
+cd feed
+docker-compose build
+docker-compose up
