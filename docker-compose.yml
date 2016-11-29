@@ -1,12 +1,15 @@
 version: '2'
 services:
-  feed_writer:
+  feed-writer:
     environment:
       - PORT
-    image: gcr.io/${PROJECT_ID}/feed-writer:v1
+      - HOSTNAME=feed-reader
+    image: gcr.io/${PROJECT_ID}/feed-writer:latest
     ports:
       - "${PORT}:${PORT}"
     depends_on:
-      - feed_reader
-  feed_reader:
-    image: gcr.io/${PROJECT_ID}/feed-reader:v2
+      - feed-reader
+  feed-reader:
+    image: gcr.io/${PROJECT_ID}/feed-reader:latest
+    ports:
+      - "81:81"
