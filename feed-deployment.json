@@ -1,0 +1,62 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "feed",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "replicas": 1,
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "service": "feed_reader"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "feed-writer",
+            "image": "gcr.io/my-first-cluster-150608/feed-writer:v1",
+            "resources": {},
+            "ports": [
+              {
+                "containerPort": 4567,
+                "hostPort": 4567,
+                "name": "feed-writer"
+              }
+            ],
+            "env": [
+              {
+                "name": "RACK_ENV",
+                "value": "production"
+              }
+            ]
+          },
+          {
+            "name": "feed-reader",
+            "image": "gcr.io/my-first-cluster-150608/feed-reader:v2",
+            "resources": {},
+            "ports": [
+              {
+                "containerPort": 80,
+                "hostPort": 80,
+                "name": "feed-reader"
+              }
+            ],
+            "env": [
+              {
+                "name": "RACK_ENV",
+                "value": "production"
+              }
+            ]
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    },
+    "strategy": {}
+  },
+  "status": {}
+}
